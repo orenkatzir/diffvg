@@ -492,14 +492,14 @@ def parse_shape(node, transform, fill_color, shapes, shape_groups, defs):
     elif tag == 'rect':
         x = 0.0
         y = 0.0
-        if x in node.attrib:
+        if 'x' in node.attrib:
             x = float(node.attrib['x'])
-        if y in node.attrib:
+        if 'y' in node.attrib:
             y = float(node.attrib['y'])
         w = float(node.attrib['width'])
         h = float(node.attrib['height'])
         p_min = torch.tensor([x, y])
-        p_max = torch.tensor([x + w, x + h])
+        p_max = torch.tensor([x + w, y + h])
         rect = pydiffvg.Rect(p_min = p_min, p_max = p_max)
         rect.stroke_width = stroke_width
         shape_ids = torch.tensor([len(shapes)])
